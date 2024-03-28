@@ -1,8 +1,9 @@
-public class UnitsOperators {
+public class UnitDecisions {
     public static void main(String[] args) {
+
         MyInitClass myInitClass = new MyInitClass();
 
-        // check operator 1 from first condition
+        //check decision 1 in condition 1 : if condition returns true
         int actual1 = myInitClass.getNumber(-60, 9);
         if (actual1 == -20) {
             System.out.println("Test one passed");
@@ -10,7 +11,7 @@ public class UnitsOperators {
             System.out.println("Test one failed");
         }
 
-        //check operator 2 from first condition
+        //check decision 2 in condition 1 : if condition returns false
         int actual2 = myInitClass.getNumber(-200, 10);
         if (actual2 == -280) {
             System.out.println("Test two passed");
@@ -18,7 +19,7 @@ public class UnitsOperators {
             System.out.println("Test two failed");
         }
 
-        //check operator from second condition
+        //check decision in condition 2 : if condition returns true
         int actual3 = myInitClass.getNumber(-6, 8);
         if (actual3 == 41) {
             System.out.println("Test three passed");
