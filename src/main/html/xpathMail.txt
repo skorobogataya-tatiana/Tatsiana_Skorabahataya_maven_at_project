@@ -1,0 +1,45 @@
+X-paths for https://mail.ru/
+
+Mail logo
+//a[@class='ph-logo svelte-18tlzaw']
+//a[@data-testid='whiteline-logo-item']
+
+Cloud menu item
+//a[text()='Облако']
+//nav[@aria-label='Проекты']/ul/li[2]/a
+
+Registration button
+//a[text()='Регистрация']
+//div[@class='ph-auth svelte-1au561b']/a
+
+Enter button
+//div[@class='ph-auth svelte-1au561b']/button
+//button[@data-click-counter='75068996']
+
+Search button
+//button[text()='Найти']
+//button[@data-testid='search-button']
+
+ladies tab
+//a[text()='Леди']
+//a[@href='//lady.mail.ru/']
+
+news item
+//div[@class='grid__ccol cea-fefe-aglop3']/ul/li[2]//a
+//ul[@class='tabs-content cea-fefe-islsxv']/li[2]//a
+
+big enter button
+//div[@id='mailbox']//button
+//button[@class='resplash-btn resplash-btn_primary resplash-btn_mailbox-big cea-fefe-ehxscg']
+
+create mail button
+//div[@id='mailbox']//a
+//a[text()='Создать почту']
+
+weather
+//span[@class='weather__temp cea-fefe-fswwb']
+//div[@class='weather cea-fefe-fswwb']/a/span
+
+details link
+//a[@class='weather__arrow cea-fefe-fswwb']
+//div[@class='weather cea-fefe-fswwb']//a[3]

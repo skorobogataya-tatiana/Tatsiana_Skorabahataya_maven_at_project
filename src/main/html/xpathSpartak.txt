@@ -1,0 +1,49 @@
+X-paths for https://spartak.by/
+
+Logo
+//img[@title='Спартак']
+//div[@class='header__logo']//img
+
+Impresso in catalog
+//div[@class='content_menu']//a[text()='Импрессо']
+//div[@class='content_menu']//a[@href='/products/Impresso/']
+
+Info for partners (top navigation menu)
+//div[@class='content_menu']//span[text()='Информация для партнеров']
+//div[@class='content_menu']//ul[@class='menu full']/li[3]//span
+
+Search icon
+//div[@class='header__search']
+//div[@class='lang-block']/div[1]
+
+Eye icon
+//span[@class='header__eye']
+//div[@class='lang-block']/span
+
+Ru language
+//div[@class='header__lang']/a[1]
+//a[text()='Ru']
+
+Ch language
+//a[text()='Ch']
+//a[@href='/cn/']
+
+Download catalogue
+//a[text()='Скачать каталог']
+//a[@class='download-catalog']
+
+Right navigation arrow
+//a[@class='flex-next']
+//ul[@class='flex-direction-nav']/li[2]/a
+
+Second navigation line in bottom navigation bar
+//ol[@class='flex-control-nav flex-control-paging']/li[2]/a
+//ol//a[text()='2']
+
+vk icon
+//div[@class='top_slider_wrapp']//img[@src='/bitrix/templates/our_shop/images/VK.svg']
+//div[@class='top_slider_wrapp']/ul/li[3]//img
+
+youtube icon
+//div[@class='top_slider_wrapp']/ul/li[last()]//img
+//div[@class='top_slider_wrapp']//img[@src='/bitrix/templates/our_shop/images/youtube.svg']
