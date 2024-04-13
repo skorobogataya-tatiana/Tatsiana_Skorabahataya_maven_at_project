@@ -20,5 +20,6 @@ public class Weather {
         driver.findElement(By.xpath("//div[@id='wob_dp']/div[2]")).click();
         System.out.println(driver.findElement(By.xpath(String.format("//*[name()='text' and contains(@aria-label, 'Celsius %s 12:00')][2]", day)))
                 .getAttribute("aria-label"));
+        driver.close();
     }
 }
