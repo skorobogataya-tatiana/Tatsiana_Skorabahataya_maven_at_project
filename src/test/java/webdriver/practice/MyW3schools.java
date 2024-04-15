@@ -1,5 +1,6 @@
 package webdriver.practice;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,5 +55,10 @@ public class MyW3schools {
             }
         }
         Assert.assertTrue("Not all search results contain the word: " + wordToCheck, allResultsContainWord);
+    }
+
+    @After
+    public void closeWindow() {
+        driver.close();
     }
 }
