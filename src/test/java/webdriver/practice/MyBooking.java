@@ -1,5 +1,6 @@
 package webdriver.practice;
 
+import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 public class MyBooking {
-    public static void main(String[] args)  {
+
         int startDay = LocalDate.now().plusDays(3).getDayOfMonth();
         int endDay = LocalDate.now().plusDays(10).getDayOfMonth();
         String closeAlertButton = "//button[@aria-label='Dismiss sign-in info.']/span";
@@ -30,6 +31,8 @@ public class MyBooking {
         String lowToHighSorting = "//span[text()='Property rating (low to high)']";
         String rate = "//div[@data-testid='property-card'][1]//div[@data-testid='review-score']/div[1]/div";
 
+        @Test
+              public void searchParisHotels() {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
