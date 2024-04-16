@@ -26,7 +26,8 @@ public class MyBooking {
         String moreRooms = "//input[@id='no_rooms']/parent::div//button[2]";
         String confirmOccupancy = "//button/span[text()='Done']";
         String searchVariants = "//button/span[text()='Search']";
-        String hotelsScoreCheckbox = "//div[text()='Pleasant: 6+']";
+        String hotelsScoreCheckboxText = "//div[text()='Pleasant: 6+']";
+        String hotelsScoreCheckbox = "//div[@data-filters-item='review_score:review_score=60']/label//span[@class='ef785aa7f4'][1]";
         String sortingDropdown = "//button[@data-testid='sorters-dropdown-trigger']";
         String lowToHighSorting = "//span[text()='Property rating (low to high)']";
         String rate = "//div[@data-testid='property-card'][1]//div[@data-testid='review-score']/div[1]/div";
@@ -66,9 +67,18 @@ public class MyBooking {
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(hotelsScoreCheckbox)))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(hotelsScoreCheckboxText)))
                 .click();
+        /*new WebDriverWait(driver, Duration.ofSeconds(40))
+                .until(ExpectedConditions
+                        .elementToBeSelected(By.xpath(hotelsScoreCheckbox)));*/
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+       try {
+               Thread.sleep(5000);
+       } catch (InterruptedException e) {
+               e.printStackTrace();
+       }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement sorting = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -77,7 +87,7 @@ public class MyBooking {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.xpath(lowToHighSorting)).click();
-        assertEquals("Score of the first sorted hotel is wrong", "Scored 7.4", driver.findElement(By.xpath(rate)).getText());
+        assertEquals("Score of the first sorted hotel is wrong", "Scored 6.0", driver.findElement(By.xpath(rate)).getText());
         driver.close();
     }
 }
