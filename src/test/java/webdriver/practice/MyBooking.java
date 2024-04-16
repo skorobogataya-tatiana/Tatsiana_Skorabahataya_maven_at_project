@@ -69,9 +69,6 @@ public class MyBooking {
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(hotelsScoreCheckboxText)))
                 .click();
-        /*new WebDriverWait(driver, Duration.ofSeconds(40))
-                .until(ExpectedConditions
-                        .elementToBeSelected(By.xpath(hotelsScoreCheckbox)));*/
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
        try {
@@ -87,7 +84,9 @@ public class MyBooking {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.xpath(lowToHighSorting)).click();
-        assertEquals("Score of the first sorted hotel is wrong", "Scored 6.0", driver.findElement(By.xpath(rate)).getText());
+        String [] scoreText = driver.findElement(By.xpath(rate)).getText().split(" ");
+        double score = Double.parseDouble(scoreText[1]);
+        assertEquals("Score of the first sorted hotel is wrong", 6.0, score, 0.01);
         driver.close();
     }
 }
