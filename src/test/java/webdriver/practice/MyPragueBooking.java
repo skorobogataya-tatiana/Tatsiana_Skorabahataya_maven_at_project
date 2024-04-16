@@ -1,5 +1,6 @@
 package webdriver.practice;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +48,10 @@ public class MyPragueBooking {
         double hotelScore = Double.parseDouble(scoreInfo[1]);
         Assert.assertTrue("Score of the hotel is less than 8", hotelScore > 8.0);
 
+    }
+
+    @After
+    public void closeWindow() {
+        driver.close();
     }
 }
