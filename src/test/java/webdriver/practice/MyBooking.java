@@ -82,11 +82,12 @@ public class MyBooking {
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        new WebDriverWait(driver, Duration.ofSeconds(40))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@data-testid='skeleton-loader']"))));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement sorting = new WebDriverWait(driver, Duration.ofSeconds(10))
