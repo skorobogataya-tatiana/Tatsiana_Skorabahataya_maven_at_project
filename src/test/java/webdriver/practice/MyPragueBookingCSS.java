@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MyPragueBookingCSS {
@@ -49,6 +50,14 @@ public class MyPragueBookingCSS {
         driver.findElement(By.cssSelector(".df7e6ba27d > div:nth-of-type(2) > div:nth-of-type(2) > div ~ div ~ div > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) h3 a")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.numberOfWindowsToBe(2));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(20))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
@@ -57,13 +66,13 @@ public class MyPragueBookingCSS {
 
         String[] scoreInfo = driver.findElement(By
                 .cssSelector("#js--hp-gallery-scorecard > a > div > div > div > div.a3b8729ab1.d86cee9b25")).getText().split(" ");
-        double hotelScore = Double.parseDouble(scoreInfo[2]);
+        double hotelScore = Double.parseDouble(scoreInfo[1]);
         Assert.assertTrue("Score of the hotel is less than 8", hotelScore > 8.0);
 
     }
 
-/*    @After
+    @After
     public void closeWindow() {
-        driver.close();
-    }*/
+        driver.quit();
+    }
 }
