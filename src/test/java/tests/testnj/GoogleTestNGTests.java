@@ -1,11 +1,11 @@
-package tests.junit;
+package tests.testnj;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import pages.GooglePage;
 import pages.W3SchoolPage;
 
-public class GoogleTests {
+public class GoogleTestNGTests {
     private GooglePage googlePage = new GooglePage();
     private W3SchoolPage w3SchoolPage = new W3SchoolPage();
 
@@ -15,7 +15,7 @@ public class GoogleTests {
         w3SchoolPage.copyPasteTitleOfThePage();
         googlePage.openGoogle();
         googlePage.insertAndSearchCopyPastedValue();
-        Assert.assertTrue("Not all search results contain search value 'tutorial",
-                googlePage.checkThatSearchWordPresentInAllSearchResults("tutorial"));
+        Assert.assertTrue(googlePage.checkThatSearchWordPresentInAllSearchResults("tutorial"),
+                "Not all search results contain search value 'tutorial");
     }
 }

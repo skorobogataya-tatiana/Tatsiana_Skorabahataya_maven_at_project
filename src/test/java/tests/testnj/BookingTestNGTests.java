@@ -1,18 +1,19 @@
-package tests.junit;
+package tests.testnj;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import pages.booking.BookingCSSHotelPage;
 import pages.booking.BookingCssHomePage;
 import pages.booking.BookingHomePage;
 import pages.booking.BookingHotelPage;
 import utils.MyUtils;
 
-public class BookingTests {
+public class BookingTestNGTests {
     private BookingHomePage bookingHomePage = new BookingHomePage();
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();
     private BookingHotelPage bookingHotelPage = new BookingHotelPage();
     private BookingCSSHotelPage bookingCssHotelPage = new BookingCSSHotelPage();
+
     @Test
     public void searchForHotelInParis() {
         bookingHomePage.openBookingHomepage();
@@ -22,7 +23,7 @@ public class BookingTests {
         bookingHomePage.searchOptions();
         bookingHomePage.filterHotelsOnRate();
         bookingHomePage.filterResultsFromLowToHighScore();
-        Assert.assertTrue("Rate of the hotel is lowwer than 6.0", bookingHomePage.compareHotelRate(6.0));
+        Assert.assertTrue(bookingHomePage.compareHotelRate(6.0), "Rate of the hotel is lowwer than 6.0");
     }
 
     @Test
@@ -34,7 +35,7 @@ public class BookingTests {
         bookingCssHomePage.searchOptions();
         bookingCssHomePage.filterHotelsOnRate();
         bookingCssHomePage.filterResultsFromLowToHighScore();
-        Assert.assertTrue("Rate of the hotel is lowwer than 6.0", bookingCssHomePage.compareHotelRate(6.0));
+        Assert.assertTrue(bookingCssHomePage.compareHotelRate(6.0), "Rate of the hotel is lowwer than 6.0");
     }
 
     @Test
@@ -49,13 +50,13 @@ public class BookingTests {
     @Test
     public void checkCurrencyButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-       Assert.assertTrue("Tooltip of currency button is not 'Select your currency'", bookingHomePage.checkCurrencyTooltip());
+        Assert.assertTrue(bookingHomePage.checkCurrencyTooltip(), "Tooltip of currency button is not 'Select your currency'");
     }
 
     @Test
     public void checkLanguagesButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-        Assert.assertTrue("Tooltip of languages button is not 'Select your language'", bookingHomePage.checkLanguagesTooltip());
+        Assert.assertTrue(bookingHomePage.checkLanguagesTooltip(), "Tooltip of languages button is not 'Select your language'");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class BookingTests {
         bookingHomePage.filterResultsFromHighToLowScore();
         bookingHomePage.selectFirstHotelInTheList();
         MyUtils.switchToTheLastBrowserTab();
-        Assert.assertTrue("Rate of the hotel is less than 8", bookingHotelPage.checkScoreOfTheHotel(8.0));
+        Assert.assertTrue(bookingHotelPage.checkScoreOfTheHotel(8.0), "Rate of the hotel is less than 8");
     }
 
     @Test
@@ -77,6 +78,6 @@ public class BookingTests {
         bookingCssHomePage.filterResultsFromHighToLowScore();
         bookingCssHomePage.selectFirstHotelInTheList();
         MyUtils.switchToTheLastBrowserTab();
-        Assert.assertTrue("Rate of the hotel is less than 8", bookingCssHotelPage.checkScoreOfTheHotel(8.0));
+        Assert.assertTrue(bookingCssHotelPage.checkScoreOfTheHotel(8.0), "Rate of the hotel is less than 8");
     }
 }

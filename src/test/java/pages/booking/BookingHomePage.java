@@ -64,7 +64,6 @@ public class BookingHomePage extends BaseTest {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(FIRST_AUTOCOMPLETE_SEARCH_VALUE)))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        //driver.findElement(By.xpath(FIRST_AUTOCOMPLETE_SEARCH_VALUE)).click();
     }
 
     public void selectCityViaEnter(String city) {
@@ -87,8 +86,6 @@ public class BookingHomePage extends BaseTest {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_PATH, endDay))))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        //driver.findElement(By.xpath(String.format(START_DATE_PATH, startDay))).click();
-        //driver.findElement(By.xpath(String.format(END_DATE_PATH, 29))).click();
     }
 
     public void selectOccupancy(int numberOfAdultsToAdd, int numberOfRoomsToAdd) {
@@ -128,7 +125,7 @@ public class BookingHomePage extends BaseTest {
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(LOADING_INDICATOR))));
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(LOADING_INDICATOR))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
