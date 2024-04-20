@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+    <test name="Booking">
+        <classes>
+            <class name="tests.testnj.BookingTestNGTests"/>
+        </classes>
+    </test>
+
+    <test name="Google">
+        <classes>
+            <class name="tests.testnj.GoogleTestNGTests"/>
+        </classes>
+    </test>
+
+    <test name="Select">
+        <classes>
+            <class name="tests.testnj.SelectTestNGTests"/>
+        </classes>
+    </test>
+</suite>
