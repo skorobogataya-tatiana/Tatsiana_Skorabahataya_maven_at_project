@@ -24,11 +24,14 @@ public class Driver {
     }
 
     private static WebDriver getChromeDriver() {
-        ChromeOptions caps = new ChromeOptions();
-        caps.addArguments("start-maximized");
-        caps.addArguments("disable-infobars");
-        caps.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-        return new ChromeDriver(caps);
+        if (null == driver) {
+            ChromeOptions caps = new ChromeOptions();
+            caps.addArguments("start-maximized");
+            caps.addArguments("disable-infobars");
+            caps.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+            return new ChromeDriver(caps);
+        }
+        else return driver;
     }
 
     private static WebDriver getFFDriver() {
