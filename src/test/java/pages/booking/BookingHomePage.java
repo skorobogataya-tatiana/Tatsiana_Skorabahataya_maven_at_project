@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class BookingHomePage extends BaseTest {
+public class BookingHomePage {
     WebDriver driver = Driver.getWebDriver();
 
     public static int startDay = LocalDate.now().plusDays(3).getDayOfMonth();

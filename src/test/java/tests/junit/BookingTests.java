@@ -6,9 +6,10 @@ import pages.booking.BookingCSSHotelPage;
 import pages.booking.BookingCssHomePage;
 import pages.booking.BookingHomePage;
 import pages.booking.BookingHotelPage;
+import tests.BaseTest;
 import utils.MyUtils;
 
-public class BookingTests {
+public class BookingTests extends BaseTest {
     private BookingHomePage bookingHomePage = new BookingHomePage();
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();
     private BookingHotelPage bookingHotelPage = new BookingHotelPage();
