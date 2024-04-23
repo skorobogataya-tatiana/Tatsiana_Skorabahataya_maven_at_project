@@ -4,8 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import pages.GooglePage;
 import pages.W3SchoolPage;
+import tests.BaseTest;
 
-public class GoogleTests {
+public class GoogleTests extends BaseTest {
     private GooglePage googlePage = new GooglePage();
     private W3SchoolPage w3SchoolPage = new W3SchoolPage();
 

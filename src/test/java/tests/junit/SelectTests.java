@@ -3,8 +3,9 @@ package tests.junit;
 import org.junit.Assert;
 import org.junit.Test;
 import pages.SelectMenuPage;
+import tests.BaseTest;
 
-public class SelectTests {
+public class SelectTests extends BaseTest {
     private SelectMenuPage selectMenuPage = new SelectMenuPage();
 
     @Test
