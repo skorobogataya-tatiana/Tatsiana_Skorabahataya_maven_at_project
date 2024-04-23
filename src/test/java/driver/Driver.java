@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -12,8 +13,8 @@ import java.util.Optional;
 public class Driver {
     public static WebDriver driver;
 
-    protected static DriverConfigs config = Optional.ofNullable(System.getProperty("CONFIG")).isEmpty() ?
-            DriverConfigs.CHROME : DriverConfigs.valueOf(System.getProperty("CONFIG"));
+    protected static Config config = Optional.ofNullable(System.getProperty("CONFIG")).isEmpty() ?
+            Config.CHROME : Config.valueOf(System.getProperty("CONFIG"));
 
     public static WebDriver getWebDriver() {
         return switch (config) {
@@ -29,9 +30,11 @@ public class Driver {
             caps.addArguments("start-maximized");
             caps.addArguments("disable-infobars");
             caps.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-            return new ChromeDriver(caps);
+            driver = new ChromeDriver(caps);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
         }
-        else return driver;
+        return driver;
     }
 
     private static WebDriver getFFDriver() {
@@ -40,5 +43,10 @@ public class Driver {
 
     private static WebDriver getRemoteDriver() {
         return null;
+    }
+
+    public static void killDriver() {
+        driver.quit();
+        driver = null;
     }
 }
