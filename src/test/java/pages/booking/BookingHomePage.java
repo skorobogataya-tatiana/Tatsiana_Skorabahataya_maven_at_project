@@ -75,6 +75,7 @@ public class BookingHomePage {
 
         //driver.findElement(By.xpath(String.format(START_DATE_XPATH, 25))).click();
         //driver.findElement(By.xpath(String.format(END_DATE_XPATH, 25))).click();
+
        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
