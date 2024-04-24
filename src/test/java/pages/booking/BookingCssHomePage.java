@@ -50,9 +50,9 @@ public class BookingCssHomePage {
         }
     }
 
-    public void selectCityViaAutoselectOption(String city) {
+    public void selectCityViaAutoselectOption(String cityName) {
 
-        driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(city);
+        driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(cityName);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
@@ -62,9 +62,9 @@ public class BookingCssHomePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
-    public void selectCityViaEnter(String city) {
+    public void selectCityViaEnter(String cityName) {
 
-        driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(city);
+        driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(cityName);
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(Keys.ENTER);
     }
 

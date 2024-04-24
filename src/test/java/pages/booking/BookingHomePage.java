@@ -53,9 +53,9 @@ public class BookingHomePage {
         }
     }
 
-    public void selectCityViaAutoselectOption(String city) {
+    public void selectCityViaAutoselectOption(String cityName) {
 
-        driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(city);
+        driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(cityName);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
@@ -65,28 +65,28 @@ public class BookingHomePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
-    public void selectCityViaEnter(String city) {
+    public void selectCityViaEnter(String cityName) {
 
-        driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(city);
+        driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(cityName);
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(Keys.ENTER);
     }
 
     public void selectDates() {
 
-        driver.findElement(By.xpath(String.format(START_DATE_XPATH, 25))).click();
-        driver.findElement(By.xpath(String.format(END_DATE_XPATH, 25))).click();
-       /* driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        //driver.findElement(By.xpath(String.format(START_DATE_XPATH, 25))).click();
+        //driver.findElement(By.xpath(String.format(END_DATE_XPATH, 25))).click();
+       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(START_DATE_PATH, 25))))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(START_DATE_XPATH, 25))))
                 .click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_PATH, 27))))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, 27))))
                 .click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));*/
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
     public void selectOccupancy(int numberOfAdultsToAdd, int numberOfRoomsToAdd) {
