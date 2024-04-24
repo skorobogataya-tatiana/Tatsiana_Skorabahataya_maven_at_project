@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 public class W3SchoolPage {
     WebDriver driver = Driver.getWebDriver();
 
-    public static final String TITLE = "//span[text()='Tutorial']";
+    public static final String TITLE_XPATH = "//span[text()='Tutorial']";
 
     public void openW3SchoolJavaPage() {
         driver.get("https://www.w3schools.com/java/");
@@ -18,7 +18,7 @@ public class W3SchoolPage {
 
     public void copyPasteTitleOfThePage() {
         Actions make = new Actions(driver);
-        WebElement title = driver.findElement(By.xpath(TITLE));
+        WebElement title = driver.findElement(By.xpath(TITLE_XPATH));
         make.doubleClick(title)
                 .keyDown(Keys.LEFT_CONTROL)
                 .sendKeys("c").clickAndHold()
