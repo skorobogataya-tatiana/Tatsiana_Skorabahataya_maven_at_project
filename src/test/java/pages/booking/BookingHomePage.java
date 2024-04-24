@@ -9,7 +9,9 @@ import tests.BaseTest;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BookingHomePage {
     WebDriver driver = Driver.getWebDriver();
@@ -32,12 +34,16 @@ public class BookingHomePage {
     public static final String HIGH_TO_LOW_SORTING_XPATH = "//span[text()='Property rating (high to low)']";
     public static final String LOW_TO_HIGH_SORTING_XPATH = "//span[text()='Property rating (low to high)']";
     public static final String HOTEL_RATE_XPATH = "//div[@data-testid='property-card'][1]//div[@data-testid='review-score']/div[1]/div";
-    public static final String LOADING_INDICATOR_XPATH = "//div[@data-testid='skeleton-loader']";
     public static final String HOTEL_TEN_XPATH = "//div[@data-testid='property-card'][10]";
     public static final String CURRENCY_BUTTON_XPATH = "//button[@data-testid='header-currency-picker-trigger']/span";
+    public static final String CURRENCY_TOOLTIP_XPATH = "//div[text()='Select your currency']";
     public static final String LANGUAGES_BUTTON_XPATH = "//button[@data-testid='header-language-picker-trigger']/span";
+    public static final String LANGUAGES_TOOLTIP_XPATH = "//div[text()='Select your language']";
     public static final String OUT_OF_CALENDAR_XPATH = "//div[@data-capla-component-boundary='b-search-web-searchresults/SearchResultsDesktop']";
     public static final String FIRST_HOTEL_IN_THE_LIST_XPATH = "//div[@data-testid='property-card'][1]//a[@data-testid='title-link']";
+
+    public static final String CALENDAR_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']";
+    public static final String SIDEBAR_FILTERS_XPATH = "//div[@class='b4b4b2787f']/div[@data-testid='filters-sidebar']";
 
     public void openBookingHomepage() {
         driver.get("https://booking.com");
@@ -71,17 +77,14 @@ public class BookingHomePage {
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(Keys.ENTER);
     }
 
-    public void selectDates() {
-
-        //driver.findElement(By.xpath(String.format(START_DATE_XPATH, 25))).click();
-        //driver.findElement(By.xpath(String.format(END_DATE_XPATH, 25))).click();
+    public void selectDates()  {
 
        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(START_DATE_XPATH, 25))))
-                .click();
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CALENDAR_XPATH)));
+        driver.findElement(By.xpath(String.format(START_DATE_XPATH, 26))).click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
@@ -108,26 +111,17 @@ public class BookingHomePage {
    }
 
     public void filterHotelsOnRate() {
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(SCORE_CHECKBOX_XPATH)))
-                .click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(SIDEBAR_FILTERS_XPATH)));
+        driver.findElement(By.xpath(SCORE_CHECKBOX_XPATH)).click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(BUTTON_WITH_SELECTED_SCORE_XPATH)));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        new WebDriverWait(driver, Duration.ofSeconds(40))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(LOADING_INDICATOR_XPATH))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
@@ -152,8 +146,8 @@ public class BookingHomePage {
     }
 
     public boolean compareHotelRate(double expectedRate) {
-        String[] scoreText = driver.findElement(By.xpath(HOTEL_RATE_XPATH)).getText().split(" ");
-        double score = Double.parseDouble(scoreText[1]);
+        List<String> scoreText = new ArrayList<>(Arrays.asList(driver.findElement(By.xpath(HOTEL_RATE_XPATH)).getText().split(" ")));
+        double score = Double.parseDouble(scoreText.get(1));
         return score > expectedRate;
     }
 
@@ -172,7 +166,7 @@ public class BookingHomePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(currencyButton);
         actions.perform();
-        return driver.findElement(By.xpath("//div[text()='Select your language']")).getText()
+        return driver.findElement(By.xpath(CURRENCY_TOOLTIP_XPATH)).getText()
                 .equals("Select your currency");
     }
 
@@ -181,7 +175,7 @@ public class BookingHomePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(languagesButton);
         actions.perform();
-        return driver.findElement(By.xpath("//div[text()='Select your language']")).getText()
+        return driver.findElement(By.xpath(LANGUAGES_TOOLTIP_XPATH)).getText()
                 .equals("Select your language");
     }
 

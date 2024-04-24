@@ -8,7 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class BookingCssHomePage {
     WebDriver driver = Driver.getWebDriver();
@@ -31,14 +33,15 @@ public class BookingCssHomePage {
     public static final String HIGH_TO_LOW_SORTING_CSS = "ul.ad7c39949a > li:nth-child(3) > button > div span";
     public static final String LOW_TO_HIGH_SORTING_CSS = "ul.ad7c39949a > li:nth-child(6) > button > div span";
     public static final String HOTEL_RATE_CSS = ".d4924c9e74 > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div > div ~ div > div > div > a >span > div .ac4a7896c7";
-    public static final String LOADING_INDICATOR_CSS = "div[data-testid='loader-container']";
     public static final String OUT_OF_CALENDAR_CSS = "div[data-capla-component-boundary='b-search-web-searchresults/SearchResultsDesktop']";
     public static final String FIRST_HOTEL_IN_THE_LIST_CSS = ".df7e6ba27d > div:nth-of-type(2) > div:nth-of-type(2) > div ~ div ~ div > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) h3 a";
+    public static final String CALENDAR_CSS = "div[data-testid='searchbox-datepicker-calendar']";
+    public static final String SIDEBAR_FILTERS_CSS = "div.b4b4b2787f > div[data-testid='filters-sidebar']";
 
     public void openBookingHomepage() {
         driver.get("https://booking.com");
         try {
-            driver.findElement(By.xpath(CLOSE_ALERT_BUTTON_CSS)).click();
+            driver.findElement(By.cssSelector(CLOSE_ALERT_BUTTON_CSS)).click();
             new WebDriverWait(driver, Duration.ofSeconds(40))
                     .ignoring(NoSuchElementException.class)
                     .ignoring(StaleElementReferenceException.class)
@@ -74,12 +77,12 @@ public class BookingCssHomePage {
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(START_DATE_XPATH, startDay))))
-                .click();
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CALENDAR_CSS)));
+        driver.findElement(By.xpath(String.format(START_DATE_XPATH, 26))).click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDay))))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, 27))))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
@@ -106,22 +109,12 @@ public class BookingCssHomePage {
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(SCORE_CHECKBOX_CSS)))
-                .click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(SIDEBAR_FILTERS_CSS)));
+        driver.findElement(By.cssSelector(SCORE_CHECKBOX_CSS)).click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(BUTTON_WITH_SELECTED_SCORE_CSS)));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        new WebDriverWait(driver, Duration.ofSeconds(40))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(LOADING_INDICATOR_CSS))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
@@ -146,8 +139,8 @@ public class BookingCssHomePage {
     }
 
     public boolean compareHotelRate(double expectedRate) {
-        String[] scoreText = driver.findElement(By.cssSelector(HOTEL_RATE_CSS)).getText().split(" ");
-        double score = Double.parseDouble(scoreText[1]);
+        List<String> scoreText = new ArrayList<>(Arrays.asList(driver.findElement(By.cssSelector(HOTEL_RATE_CSS)).getText().split(" ")));
+        double score = Double.parseDouble(scoreText.get(1));
         return score > expectedRate;
     }
 
