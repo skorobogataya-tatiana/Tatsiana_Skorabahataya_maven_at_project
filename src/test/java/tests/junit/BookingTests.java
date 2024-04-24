@@ -23,7 +23,7 @@ public class BookingTests extends BaseTest {
         bookingHomePage.searchOptions();
         bookingHomePage.filterHotelsOnRate();
         bookingHomePage.filterResultsFromLowToHighScore();
-        Assert.assertTrue("Rate of the hotel is lowwer than 6.0", bookingHomePage.compareHotelRate(6.0));
+        Assert.assertTrue("Rate of the hotel is lower than 6.0", bookingHomePage.compareHotelRate(6.0));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BookingTests extends BaseTest {
         bookingCssHomePage.searchOptions();
         bookingCssHomePage.filterHotelsOnRate();
         bookingCssHomePage.filterResultsFromLowToHighScore();
-        Assert.assertTrue("Rate of the hotel is lowwer than 6.0", bookingCssHomePage.compareHotelRate(6.0));
+        Assert.assertTrue("Rate of the hotel is lower than 6.0", bookingCssHomePage.compareHotelRate(6.0));
     }
 
     @Test

@@ -2,19 +2,19 @@
 <suite name="MyTestSuite">
     <test name="Booking">
         <classes>
-            <class name="tests.testnj.BookingTestNGTests"/>
+            <class name="tests.testng.BookingTestNGTests"/>
         </classes>
     </test>
 
     <test name="Google">
         <classes>
-            <class name="tests.testnj.GoogleTestNGTests"/>
+            <class name="tests.testng.GoogleTestNGTests"/>
         </classes>
     </test>
 
     <test name="Select">
         <classes>
-            <class name="tests.testnj.SelectTestNGTests"/>
+            <class name="tests.testng.SelectTestNGTests"/>
         </classes>
     </test>
 </suite>
