@@ -162,8 +162,8 @@ public class BookingHomePage {
     }
 
     public void changeHotelCardColors() {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", driver.findElement(By.xpath(HOTEL_TEN)));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", driver.findElement(By.xpath(HOTEL_TEN)));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", driver.findElement(By.xpath(HOTEL_TEN_XPATH)));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", driver.findElement(By.xpath(HOTEL_TEN_XPATH)));
     }
 
     public boolean checkCurrencyTooltip() {

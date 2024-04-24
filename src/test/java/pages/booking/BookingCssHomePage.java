@@ -128,7 +128,7 @@ public class BookingCssHomePage {
     public void filterResultsFromLowToHighScore() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement sorting = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(drv -> drv.findElement(By.cssSelector(SORTING_DROPDOWN_CSS));
+                .until(drv -> drv.findElement(By.cssSelector(SORTING_DROPDOWN_CSS)));
         sorting.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
