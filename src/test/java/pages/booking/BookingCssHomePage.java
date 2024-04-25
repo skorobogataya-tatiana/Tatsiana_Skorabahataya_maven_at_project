@@ -14,9 +14,6 @@ import java.util.List;
 
 public class BookingCssHomePage {
     WebDriver driver = Driver.getWebDriver();
-
-    public static int startDay = LocalDate.now().plusDays(3).getDayOfMonth();
-    public static int endDay = LocalDate.now().plusDays(10).getDayOfMonth();
     public static final String SEARCH_FIELD_CSS = "input[name='ss']";
     public static final String CLOSE_ALERT_BUTTON_CSS = "button[aria-label='Dismiss sign-in info.'] > span > span";
     public static final String FIRST_AUTOCOMPLETE_SEARCH_VALUE_CSS = "#autocomplete-result-0 > div > div > div > div.a3332d346a.d2f04c9037";
@@ -71,18 +68,18 @@ public class BookingCssHomePage {
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(Keys.ENTER);
     }
 
-    public void selectDates() {
+    public void selectDates(int startDay, int endDay) {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CALENDAR_CSS)));
-        driver.findElement(By.xpath(String.format(START_DATE_XPATH, 26))).click();
+        driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDay))).click();
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, 27))))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDay))))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }

@@ -9,6 +9,8 @@ import pages.booking.BookingHotelPage;
 import tests.BaseTest;
 import utils.MyUtils;
 
+import java.time.LocalDate;
+
 public class BookingTests extends BaseTest {
     private BookingHomePage bookingHomePage = new BookingHomePage();
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();
@@ -16,9 +18,11 @@ public class BookingTests extends BaseTest {
     private BookingCSSHotelPage bookingCssHotelPage = new BookingCSSHotelPage();
     @Test
     public void searchForHotelInParis() {
+        int startDay = LocalDate.now().plusDays(2).getDayOfMonth();
+        int endDay = LocalDate.now().plusDays(4).getDayOfMonth();
         bookingHomePage.openBookingHomepage();
         bookingHomePage.selectCityViaEnter("Париж");
-        bookingHomePage.selectDates();
+        bookingHomePage.selectDates(startDay, endDay);
         bookingHomePage.selectOccupancy(2, 1);
         bookingHomePage.searchOptions();
         bookingHomePage.filterHotelsOnRate();
@@ -28,9 +32,11 @@ public class BookingTests extends BaseTest {
 
     @Test
     public void searchForHotelInParisCSS() {
+        int startDay = LocalDate.now().plusDays(2).getDayOfMonth();
+        int endDay = LocalDate.now().plusDays(4).getDayOfMonth();
         bookingCssHomePage.openBookingHomepage();
         bookingCssHomePage.selectCityViaEnter("Париж");
-        bookingCssHomePage.selectDates();
+        bookingCssHomePage.selectDates(startDay, endDay);
         bookingCssHomePage.selectOccupancy(2, 1);
         bookingCssHomePage.searchOptions();
         bookingCssHomePage.filterHotelsOnRate();
