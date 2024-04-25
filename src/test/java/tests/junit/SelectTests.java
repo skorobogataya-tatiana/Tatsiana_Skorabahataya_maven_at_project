@@ -10,12 +10,14 @@ public class SelectTests extends BaseTest {
 
     @Test
     public void selectGreenColor() {
+        selectMenuPage.openSelectMenuPage();
         selectMenuPage.selectGreenColor();
         Assert.assertTrue("Selected color is not green", selectMenuPage.checkThatGreenColorIsSelected());
     }
 
     @Test
     public void selectAudi() {
+        selectMenuPage.openSelectMenuPage();
         selectMenuPage.selectAudi();
         Assert.assertTrue("Audi is not selected", selectMenuPage.checkThatAudiIsSelected());
     }
