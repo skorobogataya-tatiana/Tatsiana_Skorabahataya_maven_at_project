@@ -3,8 +3,9 @@ package tests.testng;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.SelectMenuPage;
+import tests.BaseTestNG;
 
-public class SelectTestNGTests {
+public class SelectTestNGTests extends BaseTestNG {
     private SelectMenuPage selectMenuPage = new SelectMenuPage();
 
     @Test

@@ -1,16 +1,17 @@
 package tests.testng;
 
+import driver.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.booking.BookingCSSHotelPage;
 import pages.booking.BookingCssHomePage;
 import pages.booking.BookingHomePage;
 import pages.booking.BookingHotelPage;
-import utils.MyUtils;
+import tests.BaseTestNG;
 
 import java.time.LocalDate;
 
-public class BookingTestNGTests {
+public class BookingTestNGTests extends BaseTestNG {
     private BookingHomePage bookingHomePage = new BookingHomePage();
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();
     private BookingHotelPage bookingHotelPage = new BookingHotelPage();
@@ -50,7 +51,7 @@ public class BookingTestNGTests {
         bookingHomePage.selectCityViaEnter("London");
         bookingHomePage.scrollToTenthHotel();
         bookingHomePage.changeHotelCardColors();
-        MyUtils.makeScreenshot();
+        Driver.makeScreenshot();
     }
 
     @Test
@@ -72,7 +73,7 @@ public class BookingTestNGTests {
         bookingHomePage.clickOutOfCalendarRegion();
         bookingHomePage.filterResultsFromHighToLowScore();
         bookingHomePage.selectFirstHotelInTheList();
-        MyUtils.switchToTheLastBrowserTab();
+        Driver.switchToTheLastBrowserTab();
         Assert.assertTrue(bookingHotelPage.checkScoreOfTheHotel(8.0), "Rate of the hotel is less than 8");
     }
 
@@ -83,7 +84,7 @@ public class BookingTestNGTests {
         bookingCssHomePage.clickOutOfCalendarRegion();
         bookingCssHomePage.filterResultsFromHighToLowScore();
         bookingCssHomePage.selectFirstHotelInTheList();
-        MyUtils.switchToTheLastBrowserTab();
+        Driver.switchToTheLastBrowserTab();
         Assert.assertTrue(bookingCssHotelPage.checkScoreOfTheHotel(8.0), "Rate of the hotel is less than 8");
     }
 }

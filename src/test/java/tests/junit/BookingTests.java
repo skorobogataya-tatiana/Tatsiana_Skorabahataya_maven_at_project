@@ -1,5 +1,6 @@
 package tests.junit;
 
+import driver.Driver;
 import org.junit.Assert;
 import org.junit.Test;
 import pages.booking.BookingCSSHotelPage;
@@ -7,7 +8,6 @@ import pages.booking.BookingCssHomePage;
 import pages.booking.BookingHomePage;
 import pages.booking.BookingHotelPage;
 import tests.BaseTest;
-import utils.MyUtils;
 
 import java.time.LocalDate;
 
@@ -50,7 +50,7 @@ public class BookingTests extends BaseTest {
         bookingHomePage.selectCityViaEnter("London");
         bookingHomePage.scrollToTenthHotel();
         bookingHomePage.changeHotelCardColors();
-        MyUtils.makeScreenshot();
+        Driver.makeScreenshot();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class BookingTests extends BaseTest {
         bookingHomePage.clickOutOfCalendarRegion();
         bookingHomePage.filterResultsFromHighToLowScore();
         bookingHomePage.selectFirstHotelInTheList();
-        MyUtils.switchToTheLastBrowserTab();
+        Driver.switchToTheLastBrowserTab();
         Assert.assertTrue("Rate of the hotel is less than 8", bookingHotelPage.checkScoreOfTheHotel(8.0));
     }
 
@@ -83,7 +83,7 @@ public class BookingTests extends BaseTest {
         bookingCssHomePage.clickOutOfCalendarRegion();
         bookingCssHomePage.filterResultsFromHighToLowScore();
         bookingCssHomePage.selectFirstHotelInTheList();
-        MyUtils.switchToTheLastBrowserTab();
+        Driver.switchToTheLastBrowserTab();
         Assert.assertTrue("Rate of the hotel is less than 8", bookingCssHotelPage.checkScoreOfTheHotel(8.0));
     }
 }
