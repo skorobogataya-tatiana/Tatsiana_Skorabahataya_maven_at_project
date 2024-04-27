@@ -18,6 +18,7 @@ public class BookingHomePage {
     public static final String SEARCH_FIELD_XPATH = "//input[@name='ss']";
     public static final String CLOSE_ALERT_BUTTON_XPATH = "//button[@aria-label='Dismiss sign-in info.']/span";
     public static final String FIRST_AUTOCOMPLETE_SEARCH_VALUE = "//ul[@role='group']/li[1]";
+    public static final String CLEAR_SEARCH_VALUE_ICON_XPATH = "//div[@data-testid='destination-container']//span[@data-testid='input-clear']";
     public static final String START_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
     public static final String END_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
     public static final String OCCUPANCY_XPATH = "//button[@data-testid='occupancy-config']";
@@ -45,12 +46,7 @@ public class BookingHomePage {
     public void openBookingHomepage() {
         driver.get("https://booking.com");
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(40))
-                    .ignoring(NoSuchElementException.class)
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(CLOSE_ALERT_BUTTON_XPATH)))
-                    .click();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            driver.findElement(By.xpath(CLOSE_ALERT_BUTTON_XPATH)).click();
         } catch (NoSuchElementException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -69,6 +65,11 @@ public class BookingHomePage {
     }
 
     public void selectCityViaEnter(String cityName) {
+        try {
+            driver.findElement(By.xpath(CLEAR_SEARCH_VALUE_ICON_XPATH)).click();
+        } catch(NoSuchElementException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
 
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(cityName);
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(Keys.ENTER);

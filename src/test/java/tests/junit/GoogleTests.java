@@ -13,7 +13,7 @@ public class GoogleTests extends BaseTest {
     @Test
     public void searchForTitleFromW3InGoogle() {
         w3SchoolPage.openW3SchoolJavaPage();
-        w3SchoolPage.copyPasteTitleOfThePage();
+        w3SchoolPage.copyTitleOfThePage();
         googlePage.openGoogle();
         googlePage.insertAndSearchCopyPastedValue();
         Assert.assertTrue("Not all search results contain search value 'tutorial",

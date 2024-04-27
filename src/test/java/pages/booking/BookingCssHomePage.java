@@ -16,6 +16,7 @@ public class BookingCssHomePage {
     WebDriver driver = Driver.getWebDriver();
     public static final String SEARCH_FIELD_CSS = "input[name='ss']";
     public static final String CLOSE_ALERT_BUTTON_CSS = "button[aria-label='Dismiss sign-in info.'] > span > span";
+    public static final String CLEAR_SEARCH_VALUE_ICON_CSS = "div[data-testid='destination-container'] span[data-testid='input-clear']";
     public static final String FIRST_AUTOCOMPLETE_SEARCH_VALUE_CSS = "#autocomplete-result-0 > div > div > div > div.a3332d346a.d2f04c9037";
     public static final String START_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
     public static final String END_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
@@ -39,12 +40,6 @@ public class BookingCssHomePage {
         driver.get("https://booking.com");
         try {
             driver.findElement(By.cssSelector(CLOSE_ALERT_BUTTON_CSS)).click();
-            new WebDriverWait(driver, Duration.ofSeconds(40))
-                    .ignoring(NoSuchElementException.class)
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(CLOSE_ALERT_BUTTON_CSS)))
-                    .click();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         } catch (NoSuchElementException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -63,6 +58,11 @@ public class BookingCssHomePage {
     }
 
     public void selectCityViaEnter(String cityName) {
+        try {
+            driver.findElement(By.cssSelector(CLEAR_SEARCH_VALUE_ICON_CSS)).click();
+        } catch(NoSuchElementException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
 
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(cityName);
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(Keys.ENTER);

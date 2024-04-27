@@ -71,7 +71,7 @@ public class Driver {
     }
 
     public static void switchToTheLastBrowserTab() {
-        getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));

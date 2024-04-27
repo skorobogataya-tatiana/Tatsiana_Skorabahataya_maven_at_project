@@ -1,6 +1,7 @@
 package tests;
 
 import driver.Driver;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;

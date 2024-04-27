@@ -13,7 +13,7 @@ public class GoogleTestNGTests extends BaseTestNG {
     @Test
     public void searchForTitleFromW3InGoogle() {
         w3SchoolPage.openW3SchoolJavaPage();
-        w3SchoolPage.copyPasteTitleOfThePage();
+        w3SchoolPage.copyTitleOfThePage();
         googlePage.openGoogle();
         googlePage.insertAndSearchCopyPastedValue();
         Assert.assertTrue(googlePage.checkThatSearchWordPresentInAllSearchResults("tutorial"),
