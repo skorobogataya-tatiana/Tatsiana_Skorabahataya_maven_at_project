@@ -6,16 +6,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import pages.booking.BookingHomePage;
+import pages.booking.BookingHotelPage;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class BookingStepDefs {
     BookingHomePage bookingHomePage = new BookingHomePage();
+    BookingHotelPage bookingHotelPage = new BookingHotelPage();
 
     @Given("I open booking homepage")
     public void openBookingHomepage() {
@@ -57,5 +55,41 @@ public class BookingStepDefs {
     @Then("I see that the rate of the first hotel in the list is not lower than {double}")
     public void compareHotelRate(double expectedRate) {
         Assert.assertTrue("Rate of the hotel is lower than 6.0", bookingHomePage.compareHotelRate(expectedRate));
+    }
+
+    @And("I scroll to tenth hotel in search results")
+    public void scrollToTenthHotelInSearchResults() {
+        bookingHomePage.scrollToTenthHotel();
+    }
+
+    @And("I change background and font color of the hotel card")
+    public void changeBackgroundAndFontColorOfHotelCard() {
+        bookingHomePage.changeHotelCardColors();
+    }
+
+    @Then("I can make a screenshot of hotel card")
+    public void makeScreenshot() {
+        Driver.makeScreenshot();
+    }
+
+    @And("I click out of calendar component")
+    public void clickOutOfCalendar() {
+        bookingHomePage.clickOutOfCalendarRegion();
+    }
+
+    @And("I sort results from highest to lowest")
+    public void sortHotelsFromHighestToLowestRate() {
+        bookingHomePage.filterResultsFromHighToLowScore();
+    }
+
+    @And("I open first hotel in the search list")
+    public void openFirstHotelInSearchList() {
+        bookingHomePage.selectFirstHotelInTheList();
+        Driver.switchToTheLastBrowserTab();
+    }
+
+    @Then("I see that rate of the opened hotel is bigger than {double}")
+    public void checkRateOfTheHotel(Double expectedRate) {
+        Assert.assertTrue("Rate of the hotel is less than 8", bookingHotelPage.checkScoreOfTheHotel(expectedRate));
     }
 }
