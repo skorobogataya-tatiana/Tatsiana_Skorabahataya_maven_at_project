@@ -10,13 +10,13 @@ public class SelectTestNGTests extends BaseTestNG {
 
     @Test
     public void selectGreenColor() {
-        selectMenuPage.selectGreenColor();
-        Assert.assertTrue(selectMenuPage.checkThatGreenColorIsSelected(), "Selected color is not green");
+        selectMenuPage.selectColor("2");
+        Assert.assertTrue(selectMenuPage.checkThatColorIsSelected("Green"), "Selected color is not green");
     }
 
     @Test
     public void selectAudi() {
-        selectMenuPage.selectAudi();
-        Assert.assertTrue(selectMenuPage.checkThatAudiIsSelected(), "Audi is not selected");
+        selectMenuPage.selectCar("audi");
+        Assert.assertTrue(selectMenuPage.checkThatCarIsSelected("Audi"), "Audi is not selected");
     }
 }
