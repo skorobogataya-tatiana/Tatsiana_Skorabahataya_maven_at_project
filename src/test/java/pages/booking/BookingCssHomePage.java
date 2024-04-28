@@ -1,18 +1,19 @@
 package pages.booking;
 
 import driver.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class BookingCssHomePage {
+    private static final Logger LOGGER = LogManager.getLogger(BookingCssHomePage.class);
     WebDriver driver = Driver.getWebDriver();
     public static final String SEARCH_FIELD_CSS = "input[name='ss']";
     public static final String CLOSE_ALERT_BUTTON_CSS = "button[aria-label='Dismiss sign-in info.'] > span > span";
@@ -38,16 +39,19 @@ public class BookingCssHomePage {
 
     public void openBookingHomepage() {
         driver.get("https://booking.com");
+        LOGGER.info("Booking home page is opened");
         try {
             driver.findElement(By.cssSelector(CLOSE_ALERT_BUTTON_CSS)).click();
+            LOGGER.info("Login info popup is closed");
         } catch (NoSuchElementException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            LOGGER.error(Arrays.toString(e.getStackTrace()));
         }
     }
 
     public void selectCityViaAutoselectOption(String cityName) {
 
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(cityName);
+        LOGGER.info("City name {} was typed in search field", cityName);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
@@ -55,17 +59,21 @@ public class BookingCssHomePage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(FIRST_AUTOCOMPLETE_SEARCH_VALUE_CSS)))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        LOGGER.info("City name {} was selected from the auto-select menu", cityName);
     }
 
     public void selectCityViaEnter(String cityName) {
         try {
             driver.findElement(By.cssSelector(CLEAR_SEARCH_VALUE_ICON_CSS)).click();
-        } catch(NoSuchElementException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            LOGGER.info("Clearing of search field is executed");
+        } catch (NoSuchElementException e) {
+            LOGGER.error(Arrays.toString(e.getStackTrace()));
         }
 
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(cityName);
+        LOGGER.info("City name {} was entered into the search field", cityName);
         driver.findElement(By.cssSelector(SEARCH_FIELD_CSS)).sendKeys(Keys.ENTER);
+        LOGGER.info("Search of hotels in {} city was triggered via Enter keyboard button", cityName);
     }
 
     public void selectDates(int startDay, int endDay) {
@@ -76,12 +84,14 @@ public class BookingCssHomePage {
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CALENDAR_CSS)));
         driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDay))).click();
+        LOGGER.info("Start date {} was selected", startDay);
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDay))))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        LOGGER.info("End date {} was selected", endDay);
     }
 
     public void selectOccupancy(int numberOfAdultsToAdd, int numberOfRoomsToAdd) {
@@ -89,16 +99,21 @@ public class BookingCssHomePage {
         for (int i = 0; i < numberOfAdultsToAdd; i++) {
             driver.findElement(By.cssSelector(ADD_ADULTS_CSS)).click();
         }
+        LOGGER.info("{} more adults were added", numberOfAdultsToAdd);
 
         for (int j = 0; j < numberOfRoomsToAdd; j++) {
             driver.findElement(By.cssSelector(ADD_ROOMS_CSS)).click();
         }
+        LOGGER.info("{} more rooms were added", numberOfRoomsToAdd);
 
         driver.findElement(By.cssSelector(CONFIRM_OCCUPANCY_CSS)).click();
+        LOGGER.info("Occupancy was confirmed");
     }
 
     public void searchOptions() {
+
         driver.findElement(By.cssSelector(SEARCH_OPTIONS_BUTTON_CSS)).click();
+        LOGGER.info("Search of options with indicated number of visitors and required number of rooms was triggered.");
     }
 
     public void filterHotelsOnRate() {
@@ -113,6 +128,7 @@ public class BookingCssHomePage {
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(BUTTON_WITH_SELECTED_SCORE_CSS)));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        LOGGER.info("Hotels in search results were filtered on score rate 6+");
     }
 
     public void filterResultsFromLowToHighScore() {
@@ -123,6 +139,7 @@ public class BookingCssHomePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.cssSelector(LOW_TO_HIGH_SORTING_CSS)).click();
+        LOGGER.info("Hotels in search results were sorted by score from lowest to highest");
     }
 
     public void filterResultsFromHighToLowScore() {
@@ -133,19 +150,25 @@ public class BookingCssHomePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.findElement(By.cssSelector(HIGH_TO_LOW_SORTING_CSS)).click();
+        LOGGER.info("Hotels in search results were sorted by score from highest to lowest");
     }
 
     public boolean compareHotelRate(double expectedRate) {
         List<String> scoreText = new ArrayList<>(Arrays.asList(driver.findElement(By.cssSelector(HOTEL_RATE_CSS)).getText().split(" ")));
         double score = Double.parseDouble(scoreText.get(1));
+        LOGGER.info("Score of the hotel was compared with the expected score of {}", expectedRate);
         return score > expectedRate;
     }
 
     public void clickOutOfCalendarRegion() {
+
         driver.findElement(By.cssSelector(OUT_OF_CALENDAR_CSS)).click();
+        LOGGER.info("Clock out of calendar component was executed");
     }
 
     public void selectFirstHotelInTheList() {
+
         driver.findElement(By.cssSelector(FIRST_HOTEL_IN_THE_LIST_CSS)).click();
+        LOGGER.info("First hotel in the search results was selected");
     }
 }
