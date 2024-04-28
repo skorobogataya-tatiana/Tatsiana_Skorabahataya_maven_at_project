@@ -67,7 +67,7 @@ public class BookingHomePage {
     public void selectCityViaEnter(String cityName) {
         try {
             driver.findElement(By.xpath(CLEAR_SEARCH_VALUE_ICON_XPATH)).click();
-        } catch(NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
 
@@ -75,9 +75,9 @@ public class BookingHomePage {
         driver.findElement(By.xpath(SEARCH_FIELD_XPATH)).sendKeys(Keys.ENTER);
     }
 
-    public void selectDates(int startDay, int endDay)  {
+    public void selectDates(int startDay, int endDay) {
 
-       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
@@ -106,7 +106,7 @@ public class BookingHomePage {
 
     public void searchOptions() {
         driver.findElement(By.xpath(SEARCH_OPTIONS_BUTTON_XPATH)).click();
-   }
+    }
 
     public void filterHotelsOnRate() {
 
@@ -159,22 +159,26 @@ public class BookingHomePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", driver.findElement(By.xpath(HOTEL_TEN_XPATH)));
     }
 
-    public boolean checkCurrencyTooltip() {
+    public void hoverCurrencyButton() {
         WebElement currencyButton = driver.findElement(By.xpath(CURRENCY_BUTTON_XPATH));
         Actions actions = new Actions(driver);
         actions.moveToElement(currencyButton);
         actions.perform();
-        return driver.findElement(By.xpath(CURRENCY_TOOLTIP_XPATH)).getText()
-                .equals("Select your currency");
     }
 
-    public boolean checkLanguagesTooltip() {
+    public boolean checkCurrencyTooltip(String currencyTooltipValue) {
+        return driver.findElement(By.xpath(CURRENCY_TOOLTIP_XPATH)).getText().equals(currencyTooltipValue);
+    }
+
+    public void hoverLanguagesButton() {
         WebElement languagesButton = driver.findElement(By.xpath(LANGUAGES_BUTTON_XPATH));
         Actions actions = new Actions(driver);
         actions.moveToElement(languagesButton);
         actions.perform();
-        return driver.findElement(By.xpath(LANGUAGES_TOOLTIP_XPATH)).getText()
-                .equals("Select your language");
+    }
+
+    public boolean checkLanguagesTooltip(String languagesTooltipValue) {
+        return driver.findElement(By.xpath(LANGUAGES_TOOLTIP_XPATH)).getText().equals(languagesTooltipValue);
     }
 
     public void clickOutOfCalendarRegion() {

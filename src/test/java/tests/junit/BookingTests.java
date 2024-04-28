@@ -16,6 +16,7 @@ public class BookingTests extends BaseTest {
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();
     private BookingHotelPage bookingHotelPage = new BookingHotelPage();
     private BookingCSSHotelPage bookingCssHotelPage = new BookingCSSHotelPage();
+
     @Test
     public void searchForHotelInParis() {
         int startDay = LocalDate.now().plusDays(2).getDayOfMonth();
@@ -56,13 +57,15 @@ public class BookingTests extends BaseTest {
     @Test
     public void checkCurrencyButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-       Assert.assertTrue("Tooltip of currency button is not 'Select your currency'", bookingHomePage.checkCurrencyTooltip());
+        bookingHomePage.hoverCurrencyButton();
+        Assert.assertTrue("Tooltip of currency button is not 'Select your currency'", bookingHomePage.checkCurrencyTooltip("Select your currency"));
     }
 
     @Test
     public void checkLanguagesButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-        Assert.assertTrue("Tooltip of languages button is not 'Select your language'", bookingHomePage.checkLanguagesTooltip());
+        bookingHomePage.hoverLanguagesButton();
+        Assert.assertTrue("Tooltip of languages button is not 'Select your language'", bookingHomePage.checkLanguagesTooltip("Select your language"));
     }
 
     @Test

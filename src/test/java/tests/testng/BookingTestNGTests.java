@@ -57,13 +57,15 @@ public class BookingTestNGTests extends BaseTestNG {
     @Test
     public void checkCurrencyButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-        Assert.assertTrue(bookingHomePage.checkCurrencyTooltip(), "Tooltip of currency button is not 'Select your currency'");
+        bookingHomePage.hoverCurrencyButton();
+        Assert.assertTrue(bookingHomePage.checkCurrencyTooltip("Select your currency"), "Tooltip of currency button is not 'Select your currency'");
     }
 
     @Test
     public void checkLanguagesButtonTooltip() {
         bookingHomePage.openBookingHomepage();
-        Assert.assertTrue(bookingHomePage.checkLanguagesTooltip(), "Tooltip of languages button is not 'Select your language'");
+        bookingHomePage.hoverLanguagesButton();
+        Assert.assertTrue(bookingHomePage.checkLanguagesTooltip("Select your language"), "Tooltip of languages button is not 'Select your language'");
     }
 
     @Test
