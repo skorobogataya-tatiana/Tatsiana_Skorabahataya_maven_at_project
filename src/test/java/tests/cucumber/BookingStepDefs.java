@@ -92,4 +92,24 @@ public class BookingStepDefs {
     public void checkRateOfTheHotel(Double expectedRate) {
         Assert.assertTrue("Rate of the hotel is less than 8", bookingHotelPage.checkScoreOfTheHotel(expectedRate));
     }
+
+    @When("I hover over currency button")
+    public void hoverOverCurrencyButton() {
+        bookingHomePage.hoverCurrencyButton();
+    }
+
+    @Then("I see tooltip with {string} text for currency button")
+    public void checkCurrencyTooltipValue(String currencyTooltipValue) {
+        bookingHomePage.checkCurrencyTooltip(currencyTooltipValue);
+    }
+
+    @When("I hover over languages button")
+    public void hoverOverLanguagesButton() {
+        bookingHomePage.hoverLanguagesButton();
+    }
+
+    @Then("I see tooltip with {string} text for languages button")
+    public void checkLanguagesTooltipValue(String languagesTooltipValue) {
+        bookingHomePage.checkLanguagesTooltip(languagesTooltipValue);
+    }
 }

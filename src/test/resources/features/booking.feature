@@ -24,3 +24,13 @@ Feature: Search hotels on booking
     And I sort results from highest to lowest
     And I open first hotel in the search list
     Then I see that rate of the opened hotel is bigger than 8
+
+  Scenario: Check tooltip of currency button
+    Given I open booking homepage
+    When I hover over currency button
+    Then I see tooltip with "Select your currency" text for currency button
+
+  Scenario: Check tooltip of languages button
+    Given I open booking homepage
+    When I hover over languages button
+    Then I see tooltip with "Select your language" text for languages button
