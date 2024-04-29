@@ -26,10 +26,8 @@ public class BookingStepDefs {
     }
 
     @And("I select startDate in {int} days and endDate in {int} days")
-    public void selectDates(Integer startDay, Integer endDay) {
-        int dateOfStart = LocalDate.now().plusDays(startDay).getDayOfMonth();
-        int dateOfEnd = LocalDate.now().plusDays(endDay).getDayOfMonth();
-        bookingHomePage.selectDates(dateOfStart, dateOfEnd);
+    public void selectDates(Integer startDayInDays, Integer endDayInDays) {
+        bookingHomePage.selectDates(startDayInDays, endDayInDays);
     }
 
     @And("I add {int} more adults and {int} more rooms in occupancy")

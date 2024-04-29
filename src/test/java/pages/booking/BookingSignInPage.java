@@ -20,6 +20,7 @@ public class BookingSignInPage {
     public static final String PASSWORD_INPUT_XPATH = "//input[@type='password']";
     public static final String SUBMIT_BUTTON_XPATH = "//button[@type='submit']";
     public static final String PRESS_AND_HOLD_XPATH = "//span[text()='Press and hold this button to pass the security check']/parent::div/p";
+    public static final String CLOSE_GENIUS_POPUP_XPATH = "//div[@role='dialog']//button[@aria-label='Dismiss']";
 
     public void enterEmailToLogin(String email) {
         driver.findElement(By.xpath(EMAIL_INPUT_XPATH)).sendKeys(email);
@@ -48,6 +49,7 @@ public class BookingSignInPage {
     public void switchToHumanConfirmationFrame() {
 
         driver.switchTo().frame(0);
+        //driver.switchTo().frame(0);
         LOGGER.info("Frame was switched");
     }
 
@@ -56,5 +58,9 @@ public class BookingSignInPage {
         Actions actions = new Actions(driver);
         actions.clickAndHold(pressAndHoldButton);
         LOGGER.info("Press and Hold button for human verification was pressed and hold");
+    }
+
+    public void closeGeniusPopup() {
+        driver.findElement(By.xpath(CLOSE_GENIUS_POPUP_XPATH)).click();
     }
 }

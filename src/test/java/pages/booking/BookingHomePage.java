@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +44,7 @@ public class BookingHomePage {
     public static final String CALENDAR_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']";
     public static final String SIDEBAR_FILTERS_XPATH = "//div[@class='b4b4b2787f']/div[@data-testid='filters-sidebar']";
     public static final String SIGN_IN_BUTTON_XPATH = "//span[text()='Sign in']";
+    public static final String LIKE_BUTTON_XPATH = "//button[@data-testid='wishlist-button']";
 
     public void openBookingHomepage() {
         driver.get("https://booking.com");
@@ -88,22 +90,24 @@ public class BookingHomePage {
         LOGGER.info("Search of hotels in {} city was triggered via Enter keyboard button", cityName);
     }
 
-    public void selectDates(int startDay, int endDay) {
+    public void selectDates(int startDayInDays, int endDayInDays) {
+        int startDate = LocalDate.now().plusDays(startDayInDays).getDayOfMonth();
+        int endDate = LocalDate.now().plusDays(endDayInDays).getDayOfMonth();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CALENDAR_XPATH)));
-        driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDay))).click();
-        LOGGER.info("Start date {} was selected", startDay);
+        driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDate))).click();
+        LOGGER.info("Start date {} was selected", startDate);
         new WebDriverWait(driver, Duration.ofSeconds(40))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDay))))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDate))))
                 .click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        LOGGER.info("End date {} was selected", endDay);
+        LOGGER.info("End date {} was selected", endDate);
     }
 
     public void selectOccupancy(int numberOfAdultsToAdd, int numberOfRoomsToAdd) {
@@ -226,6 +230,30 @@ public class BookingHomePage {
 
         driver.findElement(By.xpath(SIGN_IN_BUTTON_XPATH)).click();
         LOGGER.info("Sign in to booking button was clicked");
+    }
+
+    public void likeFirstAndLastHotelInTheList() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(drv -> drv.findElements(By.xpath(LIKE_BUTTON_XPATH)));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+        List<WebElement> likeButtons = driver.findElements(By.xpath(LIKE_BUTTON_XPATH));
+        likeButtons.getFirst().click();
+        LOGGER.info("First hotel in the list was liked");
+        likeButtons.getLast().click();
+        LOGGER.info("Last hotel in the list was liked");
+    }
+
+    public boolean checkThtFirstAndLastHotelsAreLiked() {
+        List<WebElement> likeButtons = driver.findElements(By.xpath(LIKE_BUTTON_XPATH));
+        return (likeButtons.getFirst().getCssValue("color") == "red" & likeButtons.getLast().getAttribute("color") == "red");
+    }
+
+    public void returnColorValue() {
+        List<WebElement> likeButtons = driver.findElements(By.xpath(LIKE_BUTTON_XPATH));
+        System.out.println(likeButtons.getFirst().getAttribute("color"));
+
     }
 
 }
