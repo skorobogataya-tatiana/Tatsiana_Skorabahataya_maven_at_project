@@ -9,8 +9,6 @@ import pages.booking.BookingHomePage;
 import pages.booking.BookingHotelPage;
 import tests.BaseTestNG;
 
-import java.time.LocalDate;
-
 public class BookingTestNGTests extends BaseTestNG {
     private BookingHomePage bookingHomePage = new BookingHomePage();
     private BookingCssHomePage bookingCssHomePage = new BookingCssHomePage();

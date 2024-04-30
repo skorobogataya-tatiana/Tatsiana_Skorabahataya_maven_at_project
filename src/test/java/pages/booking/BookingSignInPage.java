@@ -7,11 +7,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.w3c.dom.html.HTMLIFrameElement;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookingSignInPage {
     private static final Logger LOGGER = LogManager.getLogger(BookingSignInPage.class);
