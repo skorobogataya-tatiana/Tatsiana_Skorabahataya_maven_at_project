@@ -22,7 +22,9 @@ public class BookingHomePage {
     public static final String FIRST_AUTOCOMPLETE_SEARCH_VALUE = "//ul[@role='group']/li[1]";
     public static final String CLEAR_SEARCH_VALUE_ICON_XPATH = "//div[@data-testid='destination-container']//span[@data-testid='input-clear']";
     public static final String START_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
+    public static final String START_DATE_MONTH2_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[2]/table/tbody//span[text()='%s']";
     public static final String END_DATE_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
+    public static final String END_DATE_MONTH2_XPATH = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[2]/table/tbody//span[text()='%s']";
     public static final String OCCUPANCY_XPATH = "//button[@data-testid='occupancy-config']";
     public static final String ADD_ADULTS_XPATH = "//input[@id='group_adults']/parent::div//button[2]";
     public static final String ADD_ROOMS_XPATH = "//input[@id='no_rooms']/parent::div//button[2]";
@@ -99,13 +101,18 @@ public class BookingHomePage {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CALENDAR_XPATH)));
-        driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDate))).click();
+        if(startDayInDays > 30 || startDayInDays >= startDate) {
+            driver.findElement(By.xpath(String.format(START_DATE_MONTH2_XPATH, startDate))).click();
+        } else {
+            driver.findElement(By.xpath(String.format(START_DATE_XPATH, startDate))).click();
+        }
         LOGGER.info("Start date {} was selected", startDate);
-        new WebDriverWait(driver, Duration.ofSeconds(40))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(END_DATE_XPATH, endDate))))
-                .click();
+
+        if(endDayInDays > 30 || endDayInDays >= endDate) {
+            driver.findElement(By.xpath(String.format(END_DATE_MONTH2_XPATH, startDate))).click();
+        } else {
+            driver.findElement(By.xpath(String.format(END_DATE_XPATH, startDate))).click();
+        }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         LOGGER.info("End date {} was selected", endDate);
     }

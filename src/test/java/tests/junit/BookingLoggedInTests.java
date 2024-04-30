@@ -16,7 +16,7 @@ public class BookingLoggedInTests {
         bookingSignInPage.enterPassword("$Korona2018");
         bookingSignInPage.submitLogin();
         bookingSignInPage.switchToHumanConfirmationFrame();
-        bookingSignInPage.pressAndHoldHumanConfirmationButton();
+        //bookingSignInPage.pressAndHoldHumanConfirmationButton();
         //bookingSignInPage.closeGeniusPopup();
         bookingHomePage.selectCityViaEnter("Madrid");
         bookingHomePage.selectDates(30, 35);

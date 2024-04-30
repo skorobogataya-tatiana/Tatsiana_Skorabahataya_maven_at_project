@@ -19,11 +19,9 @@ public class BookingTests extends BaseTest {
 
     @Test
     public void searchForHotelInParis() {
-        int startDay = LocalDate.now().plusDays(2).getDayOfMonth();
-        int endDay = LocalDate.now().plusDays(4).getDayOfMonth();
         bookingHomePage.openBookingHomepage();
         bookingHomePage.selectCityViaEnter("Париж");
-        bookingHomePage.selectDates(startDay, endDay);
+        bookingHomePage.selectDates(2, 4);
         bookingHomePage.selectOccupancy(2, 1);
         bookingHomePage.searchOptions();
         bookingHomePage.filterHotelsOnRate();
@@ -33,11 +31,9 @@ public class BookingTests extends BaseTest {
 
     @Test
     public void searchForHotelInParisCSS() {
-        int startDay = LocalDate.now().plusDays(2).getDayOfMonth();
-        int endDay = LocalDate.now().plusDays(4).getDayOfMonth();
         bookingCssHomePage.openBookingHomepage();
         bookingCssHomePage.selectCityViaEnter("Париж");
-        bookingCssHomePage.selectDates(startDay, endDay);
+        bookingCssHomePage.selectDates(2, 4);
         bookingCssHomePage.selectOccupancy(2, 1);
         bookingCssHomePage.searchOptions();
         bookingCssHomePage.filterHotelsOnRate();
