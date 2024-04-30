@@ -259,8 +259,13 @@ public class BookingHomePage {
 
     public void returnColorValue() {
         List<WebElement> likeButtons = driver.findElements(By.xpath(LIKE_BUTTON_XPATH));
-        System.out.println(likeButtons.getFirst().getAttribute("color"));
+        LOGGER.info(likeButtons.getFirst().getAttribute("color"));
+    }
 
+    public void switchToDefaultFrame() {
+
+        driver.switchTo().defaultContent();
+        LOGGER.info("Frame was switched to default");
     }
 
 }
