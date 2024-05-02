@@ -67,4 +67,14 @@ public class ChuckNorris {
         LOGGER.info(categories);
     }
 
+    @Test
+    public void retrieveResultOfFreeSearch() {
+        String searchResult = RestAssured.given()
+                .spec(requestSpecNoUrl)
+                .when()
+                .get("https://api.chucknorris.io/jokes/search?query=individual")
+                .then()
+                .extract().body().asString();
+        LOGGER.info(searchResult);
+    }
 }
