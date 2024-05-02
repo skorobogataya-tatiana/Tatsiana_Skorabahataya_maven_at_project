@@ -17,4 +17,10 @@
             <class name="tests.testng.SelectTestNGTests"/>
         </classes>
     </test>
+
+    <test name="Chuck Norris">
+        <classes>
+            <class name="tests.testng.api.ChuckNorris"/>
+        </classes>
+    </test>
 </suite>
