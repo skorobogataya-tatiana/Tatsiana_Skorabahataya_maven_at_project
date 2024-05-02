@@ -13,7 +13,7 @@ public class RecipeJsonRunner {
     ObjectMapper objectMapper = new ObjectMapper();
     public static void main(String[] args) throws IOException {
         RecipeJsonRunner recipe = new RecipeJsonRunner();
-        //recipe.toJson();
+        recipe.toJson();
         recipe.fromJson();
     }
     public void toJson() throws IOException {

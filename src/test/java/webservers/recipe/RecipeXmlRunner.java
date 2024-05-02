@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class RecipeXmlRunner {
     public static void main(String[] args) throws IOException {
         RecipeXmlRunner recipeXmlRunner = new RecipeXmlRunner();
-        //recipeXmlRunner.toXml();
+        recipeXmlRunner.toXml();
         recipeXmlRunner.fromXml();
 
     }
