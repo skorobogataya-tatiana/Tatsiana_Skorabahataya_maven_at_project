@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +15,12 @@ public class ChuckNorris {
 
     RequestSpecification requestSpecRandom = new RequestSpecBuilder()
             .setBaseUri("https://api.chucknorris.io/jokes/random")
+            .setAccept(ContentType.JSON)
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build();
+
+    RequestSpecification requestSpecNoUrl = new RequestSpecBuilder()
             .setAccept(ContentType.JSON)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
@@ -37,6 +44,17 @@ public class ChuckNorris {
                 .when()
                 .get().path("value");
         LOGGER.info(randomJokeValue);
+    }
+
+    @Test
+    public void retrieveRandomJokeOfCategory() {
+        Response randomMusicJoke = RestAssured.given()
+                .spec(requestSpecNoUrl)
+                .when()
+                .get("https://api.chucknorris.io/jokes/random?category=music");
+        String category = randomMusicJoke.path("categories").toString();
+        String jokeValue = randomMusicJoke.path("value");
+        LOGGER.info("Category: " + category + ", value: " + jokeValue);
     }
 
 }
