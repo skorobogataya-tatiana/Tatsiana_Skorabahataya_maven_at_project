@@ -57,4 +57,14 @@ public class ChuckNorris {
         LOGGER.info("Category: " + category + ", value: " + jokeValue);
     }
 
+    @Test
+    public void retrieveListOfCategories() {
+        Response categoriesList = RestAssured.given()
+                .spec(requestSpecNoUrl)
+                .when()
+                .get("https://api.chucknorris.io/jokes/categories");
+        String categories = categoriesList.asString();
+        LOGGER.info(categories);
+    }
+
 }
