@@ -1,4 +1,4 @@
-package webservers;
+package webservers.recipe;
 
 import java.util.Objects;
 

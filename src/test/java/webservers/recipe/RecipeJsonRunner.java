@@ -1,4 +1,4 @@
-package webservers;
+package webservers.recipe;
 
 
 
@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class MyRecipe {
+public class RecipeJsonRunner {
 
     ObjectMapper objectMapper = new ObjectMapper();
     public static void main(String[] args) throws IOException {
-        MyRecipe recipe = new MyRecipe();
+        RecipeJsonRunner recipe = new RecipeJsonRunner();
         //recipe.toJson();
         recipe.fromJson();
-
     }
     public void toJson() throws IOException {
         Recipe recipe = new Recipe("Salad",
@@ -31,6 +30,4 @@ public class MyRecipe {
                 .readValue(new File("src/test/resources/recipe.json"), Recipe.class);
         System.out.println(recipe);
     }
-
-
 }
