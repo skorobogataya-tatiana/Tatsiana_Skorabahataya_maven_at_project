@@ -19,15 +19,18 @@ public class TrashMailHomePage {
 
     public void openTrashMail() {
         driver.get("https://trashmail.com/");
+        LOGGER.info("Trashmail homepage is opened.");
     }
 
     public void inputRealEmailValue(String email) {
         driver.findElement(By.xpath(INPUT_REAL_EMAIL_XPATH)).clear();
         driver.findElement(By.xpath(INPUT_REAL_EMAIL_XPATH)).sendKeys(email);
+        LOGGER.info("Valid email is inputted to the email field.");
     }
 
     public void requestToGenerateEmail() {
         driver.findElement(By.xpath(REQUEST_FAKE_EMAIL_BUTTON_XPATH)).click();
+        LOGGER.info("Fake trashmail email is requested");
     }
 
 
